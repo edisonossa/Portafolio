@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="es">
+<!--
+================================================================================
+AI_MAINTENANCE_DIRECTIVE / INSTRUCCIONES OBLIGATORIAS PARA FUTURAS EDICIONES CON IA
+================================================================================
+SI ERES UNA IA MODIFICANDO ESTE ARCHIVO, DEBES CUMPLIR ESTAS REGLAS SIN EXCEPCIÓN:
+
+1. SEPARACIÓN WEB VS. PDF ATS:
+   - La vista en pantalla (web) mantiene el diseño visual moderno en tonos azul oscuro.
+   - La vista de impresión/exportación a PDF (@media print) DEBE SER 100% APTA PARA ATS
+     (Applicant Tracking Systems).
+
+2. REGLAS ESTRICTAS PARA @media print (NO ROMPER NI ELIMINAR):
+   - Diseño estrictamente de UNA SOLA COLUMNA (display: block). Prohibido usar
+     CSS Grid, tablas de diseño o layouts multicolumna al imprimir.
+   - Tipografía estándar del sistema (Arial, Helvetica, sans-serif), texto negro (#000000)
+     sobre fondo blanco puro (#ffffff), sin sombras, sin gradientes y sin fondos de color.
+   - Ocultar siempre elementos no legibles por ATS: fotografías (.photo-frame),
+     códigos QR (.qr-card), íconos SVG, botones, barras de navegación, filtros y pie web.
+   - Mantener visible el bloque .ats-only (.ats-contact-line) en la parte superior con
+     datos de contacto en texto plano y URLs completas (sin ocultar el enlace detrás de
+     palabras genéricas).
+   - Mantener encabezados semánticos claros (h1, h2, h3, h4) y viñetas nativas (ul/li).
+   - Formatear habilidades y herramientas en texto plano separado por comas al imprimir.
+   - Evitar break-inside: avoid en contenedores largos (como empresas con múltiples cargos);
+     aplicarlo únicamente a bloques individuales (.role-block, .edu-item, .project-card).
+
+3. SINCRONIZACIÓN DE DATOS:
+   - Si actualizas teléfono, correo, ciudad o LinkedIn en la web, actualiza también el
+     bloque .ats-contact-line dentro de #inicio.
+================================================================================
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edison Ossa Rendón | Coordinador de Operaciones y Transformación Digital</title>
+  <meta name="description" content="Portafolio profesional de Edison Ossa Rendón: Coordinador de Operaciones y Transformación Digital, especialista en control de inventarios, Business Intelligence y optimización de procesos." />
+  <meta name="ai-instructions" content="PRESERVE ATS-COMPLIANT @media print RULES: single-column layout, black text on white background, Arial/Helvetica font, no images/SVGs/QR codes in print, plain-text contact header with full URLs." />
+
+  <!-- Tipografía profesional (solo vista web; en PDF ATS se fuerza Arial/Helvetica) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Librería ligera para generar código QR en el navegador (solo vista web) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+
+  <style>
+    :root {
+      --bg-primary: #0d1326;
+      --bg-secondary: #121a33;
+      --bg-card: #17213e;
+      --bg-card-hover: #1d294d;
+      --accent: #5271ff;
+      --accent-soft: rgba(82, 113, 255, 0.14);
+      --accent-hover: #6c87ff;
+      --text-primary: #f4f7ff;
+      --text-secondary: #a4b0cc;
+      --text-muted: #7886a8;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(82, 113, 255, 0.35);
+      --success: #38bdf8;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow: 0 18px 40px rgba(4, 8, 22, 0.45);
+      --max-width: 1120px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      line-height: 1.25;
+      color: var(--text-primary);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Elementos visibles únicamente en la exportación PDF ATS */
+    .ats-only {
+      display: none;
+    }
+
+    /* ================= NAVEGACIÓN ================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 19, 38, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 74px;
+      gap: 20px;
+    }
+
+    .brand {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.12rem;
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.22s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(82, 113, 255, 0.28);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+      padding: 78px 0 84px;
+      background:
+        radial-gradient(circle at 82% 25%, rgba(82, 113, 255, 0.16), transparent 45%),
+        radial-gradient(circle at 12% 85%, rgba(56, 189, 248, 0.08), transparent 40%),
+        var(--bg-primary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.85fr;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--accent-soft);
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #b8c7ff;
+      margin-bottom: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.4vw, 3.35rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero-role {
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      color: #8fa6ff;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero-summary {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 590px;
+      margin-bottom: 28px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .photo-frame {
+      position: relative;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+
+    .photo-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: linear-gradient(160deg, #1b274b 0%, #0f162d 100%);
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow);
+      aspect-ratio: 4 / 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .photo-fallback {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(155deg, #1b284e 0%, #10172e 100%);
+    }
+
+    .photo-fallback .initials {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .photo-fallback small {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      max-width: 210px;
+    }
+
+    .photo-tag {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      background: rgba(13, 19, 38, 0.86);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .photo-tag strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--text-primary);
+    }
+
+    .photo-tag span {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+    }
+
+    .kpi-pill {
+      background: var(--accent-soft);
+      color: #9eb3ff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* ================= SECCIONES GENERALES ================= */
+    section {
+      padding: 76px 0;
+    }
+
+    section.alt-bg {
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header {
+      margin-bottom: 42px;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: #8fa6ff;
+      margin-bottom: 8px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.15rem);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+    }
+
+    .section-line {
+      width: 52px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 4px;
+      margin-top: 12px;
+    }
+
+    /* ================= ACERCA DE MÍ ================= */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .about-text p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .metric-box {
+      background: rgba(13, 19, 38, 0.55);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 14px;
+      text-align: center;
+    }
+
+    .metric-box strong {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.45rem;
+      color: #8fa6ff;
+      margin-bottom: 4px;
+    }
+
+    .metric-box span {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.3;
+      display: block;
+    }
+
+    .skills-group h3 {
+      font-size: 1rem;
+      margin-bottom: 14px;
+      color: var(--text-primary);
+    }
+
+    .skills-group + .skills-group {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .tag {
+      background: rgba(82, 113, 255, 0.1);
+      border: 1px solid rgba(82, 113, 255, 0.25);
+      color: #d6e0ff;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
+
+    /* ================= EXPERIENCIA ================= */
+    .timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .exp-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-md);
+      padding: 26px 28px;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .exp-company {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .exp-location {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .exp-period {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #a4b8ff;
+      background: var(--accent-soft);
+      padding: 5px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .role-block + .role-block {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .role-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .role-title-row h4 {
+      font-size: 1rem;
+      color: #dbe4ff;
+    }
+
+    .role-dates {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .exp-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .exp-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--text-secondary);
+      font-size: 0.93rem;
+    }
+
+    .exp-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ================= PROYECTOS (PASADO, PRESENTE, FUTURO) ================= */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+    }
+
+    .project-card.hidden {
+      display: none;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .status-pasado {
+      background: rgba(148, 163, 184, 0.14);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .status-presente {
+      background: rgba(56, 189, 248, 0.14);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+
+    .status-futuro {
+      background: rgba(82, 113, 255, 0.16);
+      color: #a8bcff;
+      border: 1px solid rgba(82, 113, 255, 0.38);
+    }
+
+    .project-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .project-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .mini-tag {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 4px 9px;
+      border-radius: 6px;
+    }
+
+    /* ================= FORMACIÓN Y CERTIFICACIONES ================= */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .edu-subtitle {
+      margin-bottom: 18px;
+      font-size: 1.08rem;
+      color: #b8c7ff;
+    }
+
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .edu-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
+    }
+
+    .edu-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .edu-item h3 {
+      font-size: 0.98rem;
+      font-weight: 700;
+    }
+
+    .edu-year {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #9cb2ff;
+      white-space: nowrap;
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .edu-inst {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    .edu-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* ================= CONTACTO Y QR ================= */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .contact-items {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .contact-box {
+      background: rgba(13, 19, 38, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      transition: border-color 0.2s ease;
+    }
+
+    .contact-box:hover {
+      border-color: var(--border-strong);
+    }
+
+    .contact-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .contact-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      word-break: break-word;
+    }
+
+    .social-heading {
+      font-size: 0.96rem;
+      margin-bottom: 12px;
+      color: #b8c7ff;
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(82, 113, 255, 0.12);
+      border: 1px solid rgba(82, 113, 255, 0.3);
+      color: #dce4ff;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .social-btn:hover {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .qr-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .qr-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .qr-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+
+    .qr-box {
+      background: #ffffff;
+      padding: 14px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      min-width: 178px;
+      min-height: 178px;
+    }
+
+    .qr-number {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #a4b8ff;
+      letter-spacing: 0.4px;
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      background: var(--bg-primary);
+    }
+
+    /* ================= RESPONSIVO ================= */
+    @media (max-width: 960px) {
+      .hero-grid,
+      .about-grid,
+      .edu-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        padding: 56px 0 64px;
+      }
+
+      .photo-frame {
+        max-width: 280px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      nav {
+        position: absolute;
+        top: 74px;
+        left: 0;
+        right: 0;
+        background: #10172f;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 18px 24px 24px;
+        gap: 14px;
+        display: none;
+      }
+
+      nav.open {
+        display: flex;
+      }
+
+      .projects-grid,
+      .contact-items,
+      .metrics-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ==========================================================================
+       EXPORTACIÓN PDF ESTRICTAMENTE APTA PARA ATS (@media print)
+       [AI_GUARDRAIL]: Mantener 1 sola columna, fuente estándar Arial/Helvetica,
+       negro sobre blanco, sin foto, sin SVG, sin QR y sin tablas/cajas visuales.
+       ========================================================================== */
+    @media print {
+      @page {
+        margin: 14mm 15mm;
+      }
+
+      * {
+        background: transparent !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        border-radius: 0 !important;
+      }
+
+      html,
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 10pt !important;
+        line-height: 1.42 !important;
+      }
+
+      h1, h2, h3, h4 {
+        font-family: Arial, Helvetica, sans-serif !important;
+        color: #000000 !important;
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+
+      /* Ocultar elementos visuales incompatibles o innecesarios para ATS */
+      header,
+      footer,
+      svg,
+      .photo-frame,
+      .hero-badge,
+      .hero-summary,
+      .hero-meta,
+      .hero-cta,
+      .section-kicker,
+      .section-line,
+      .metrics-row,
+      .filter-bar,
+      #contacto {
+        display: none !important;
+      }
+
+      /* Mostrar elementos exclusivos de texto plano para ATS */
+      .ats-only {
+        display: block !important;
+      }
+
+      .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      section,
+      section.alt-bg {
+        padding: 0 !important;
+        margin: 0 0 11pt 0 !important;
+        border: none !important;
+      }
+
+      /* Encabezado ATS: Nombre, Cargo y Datos de Contacto en texto plano */
+      .hero {
+        padding: 0 0 8pt 0 !important;
+        margin: 0 0 10pt 0 !important;
+        border-bottom: 1.5pt solid #000000 !important;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .edu-grid,
+      .projects-grid,
+      .timeline,
+      .edu-list {
+        display: block !important;
+      }
+
+      .hero h1 {
+        font-size: 17pt !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.4px !important;
+        margin-bottom: 3pt !important;
+      }
+
+      .hero-role {
+        font-size: 11pt !important;
+        font-weight: 700 !important;
+        margin-bottom: 5pt !important;
+      }
+
+      .ats-contact-line {
+        font-size: 9.2pt !important;
+        line-height: 1.4 !important;
+      }
+
+      /* Títulos de sección estándar para parsers ATS */
+      .section-header {
+        margin-bottom: 6pt !important;
+      }
+
+      .section-header h2 {
+        font-size: 11pt !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        border-bottom: 0.8pt solid #000000 !important;
+        padding-bottom: 2pt !important;
+      }
+
+      /* Tarjetas convertidas a bloques planos sin bordes */
+      .card,
+      .exp-card,
+      .project-card,
+      .edu-item {
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 0 8pt 0 !important;
+      }
+
+      .about-text p {
+        margin-bottom: 5pt !important;
+        text-align: left !important;
+      }
+
+      /* Competencias y herramientas en formato texto lineal separado por comas */
+      .skills-group {
+        margin-top: 6pt !important;
+        padding-top: 0 !important;
+        border-top: none !important;
+      }
+
+      .skills-group h3 {
+        display: inline !important;
+        font-size: 10pt !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+      }
+
+      .skills-group h3::after {
+        content: ": ";
+      }
+
+      .tags {
+        display: inline !important;
+      }
+
+      .tag {
+        display: inline !important;
+        border: none !important;
+        padding: 0 !important;
+        font-size: 9.8pt !important;
+        font-weight: 400 !important;
+      }
+
+      .tag::after {
+        content: ", ";
+      }
+
+      .tag:last-child::after {
+        content: ".";
+      }
+
+      /* Experiencia profesional en orden cronológico inverso y flujo lineal */
+      .exp-card {
+        margin-bottom: 10pt !important;
+      }
+
+      .exp-header {
+        display: block !important;
+        margin-bottom: 4pt !important;
+      }
+
+      .exp-header > div {
+        display: inline !important;
+      }
+
+      .exp-company {
+        display: inline !important;
+        font-size: 10.5pt !important;
+        font-weight: 700 !important;
+      }
+
+      .exp-location {
+        display: inline !important;
+        font-size: 9.5pt !important;
+      }
+
+      .exp-location::before {
+        content: " — ";
+      }
+
+      .exp-period {
+        display: inline !important;
+        padding: 0 !important;
+        font-size: 9.5pt !important;
+        font-weight: 700 !important;
+      }
+
+      .exp-period::before {
+        content: " | ";
+      }
+
+      .role-block {
+        margin-top: 4pt !important;
+        margin-bottom: 6pt !important;
+        padding-top: 0 !important;
+        border-top: none !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .role-title-row {
+        display: block !important;
+        margin-bottom: 3pt !important;
+      }
+
+      .role-title-row h4 {
+        display: inline !important;
+        font-size: 10pt !important;
+        font-weight: 700 !important;
+      }
+
+      .role-dates {
+        display: inline !important;
+        font-size: 9.5pt !important;
+        font-weight: 400 !important;
+      }
+
+      .role-dates::before {
+        content: " | ";
+      }
+
+      /* Viñetas estándar nativas (mejor reconocimiento en ATS que pseudo-elementos) */
+      .exp-list {
+        display: block !important;
+        list-style-type: disc !important;
+        margin: 0 0 4pt 16pt !important;
+        padding: 0 !important;
+      }
+
+      .exp-list li {
+        display: list-item !important;
+        padding-left: 0 !important;
+        margin-bottom: 2.5pt !important;
+        font-size: 9.6pt !important;
+      }
+
+      .exp-list li::before {
+        display: none !important;
+        content: none !important;
+      }
+
+      /* Proyectos: mostrar todas las etapas en una sola columna */
+      .project-card,
+      .project-card.hidden {
+        display: block !important;
+        margin-bottom: 7pt !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .status-badge {
+        display: inline !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: 9pt !important;
+        font-weight: 700 !important;
+      }
+
+      .status-badge::after {
+        content: " — ";
+      }
+
+      .project-card h3 {
+        display: inline !important;
+        font-size: 10pt !important;
+        font-weight: 700 !important;
+      }
+
+      .project-card p {
+        margin: 2pt 0 !important;
+        font-size: 9.5pt !important;
+      }
+
+      .project-footer {
+        display: block !important;
+        border: none !important;
+        padding-top: 1pt !important;
+      }
+
+      .project-footer::before {
+        content: "Enfoque y herramientas: ";
+        font-size: 9pt !important;
+        font-weight: 700 !important;
+      }
+
+      .mini-tag {
+        display: inline !important;
+        padding: 0 !important;
+        font-size: 9pt !important;
+      }
+
+      .mini-tag::after {
+        content: ", ";
+      }
+
+      .mini-tag:last-child::after {
+        content: ".";
+      }
+
+      /* Formación académica y certificaciones en una sola columna */
+      .edu-grid > div {
+        margin-bottom: 8pt !important;
+      }
+
+      .edu-subtitle {
+        font-size: 10.2pt !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        margin: 6pt 0 4pt 0 !important;
+      }
+
+      .edu-item {
+        margin-bottom: 5pt !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .edu-item-top {
+        display: block !important;
+        margin-bottom: 1pt !important;
+      }
+
+      .edu-item h3 {
+        display: inline !important;
+        font-size: 10pt !important;
+        font-weight: 700 !important;
+      }
+
+      .edu-year {
+        display: inline !important;
+        padding: 0 !important;
+        font-size: 9.5pt !important;
+        font-weight: 400 !important;
+      }
+
+      .edu-year::before {
+        content: " | ";
+      }
+
+      .edu-inst,
+      .edu-note {
+        font-size: 9.4pt !important;
+        margin-top: 1pt !important;
+      }
+
+      .ats-references-note {
+        margin-top: 8pt !important;
+        padding-top: 6pt !important;
+        border-top: 0.6pt solid #000000 !important;
+        font-size: 9.2pt !important;
+      }
+
+      a[href]::after {
+        content: "" !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ENCABEZADO (SOLO WEB) -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#inicio" class="brand">
+        <span class="brand-dot"></span>
+        Edison Ossa Rendón
+      </a>
+
+      <nav id="mainNav">
+        <a href="#acerca">Acerca de mí</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#formacion">Formación</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-primary" onclick="exportarPDF()" title="Exportar hoja de vida en formato PDF apto para ATS">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Exportar PDF (ATS)
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- INICIO / HERO (EN PDF SE CONVIERTE EN ENCABEZADO ATS) -->
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div>
+        <span class="hero-badge">Administración Tecnológica · 8.º Semestre · ITM</span>
+        <h1>Edison Ossa Rendón</h1>
+        <p class="hero-role">Coordinador de Operaciones y Transformación Digital</p>
+
+        <!-- ENCABEZADO DE CONTACTO PLANO SOLO PARA PDF ATS (Mantener sincronizado con #contacto) -->
+        <p class="ats-only ats-contact-line">
+          Medellín, Antioquia, Colombia | Teléfono: +57 300 428 6188 | Correo: Edison050899@gmail.com<br />
+          LinkedIn: https://www.linkedin.com/in/edison-ossa-rendon-514617319/
+        </p>
+
+        <p class="hero-summary">
+          Líder orientado a resultados en control de inventarios (VMI y mayoristas), análisis de costos operativos, Business Intelligence y automatización de procesos para maximizar la rentabilidad y la trazabilidad operativa.
+        </p>
+
+        <div class="hero-meta">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8fa6ff" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Medellín, Antioquia, Colombia
+          </span>
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8fa6ff" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            VAIN S.A.S.
+          </span>
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8fa6ff" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +57 300 428 6188
+          </span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#contacto" class="btn btn-primary">Contactar ahora</a>
+          <a href="https://www.linkedin.com/in/edison-ossa-rendon-514617319/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            Ver perfil en LinkedIn
+          </a>
+          <button class="btn btn-outline" onclick="exportarPDF()">Descargar CV (PDF ATS)</button>
+        </div>
+      </div>
+
+      <div class="photo-frame">
+        <div class="photo-card">
+          <!-- Guarda tu foto como "foto.jpg" en la misma carpeta de este archivo HTML -->
+          <img
+            src="foto.jpg"
+            alt="Fotografía profesional de Edison Ossa Rendón"
+            onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';"
+          />
+          <div class="photo-fallback" id="photoFallback">
+            <div class="initials">EO</div>
+            <strong>Edison Ossa Rendón</strong>
+            <small>Coloca tu imagen como <code>foto.jpg</code> en la misma carpeta para mostrar tu fotografía aquí.</small>
+          </div>
+
+          <div class="photo-tag">
+            <div>
+              <strong>+7 años de trayectoria</strong>
+              <span>Operaciones · Inventarios · BI</span>
+            </div>
+            <span class="kpi-pill">&gt;95% Exactitud</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACERCA DE MÍ / PERFIL PROFESIONAL Y HABILIDADES -->
+  <section id="acerca">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">Perfil Profesional</span>
+        <h2>Perfil profesional y competencias</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="about-grid">
+        <div class="card about-text">
+          <p>
+            Estudiante de 8.º semestre de <strong>Administración Tecnológica</strong> en la Institución Universitaria ITM y <strong>Tecnólogo en Gestión Logística</strong> del SENA. Actualmente me desempeño como <strong>Coordinador de Operaciones y Transformación Digital</strong> en VAIN S.A.S., liderando el control estratégico de inventarios, la eficiencia logística y la modernización tecnológica de los procesos operativos.
+          </p>
+          <p>
+            Cuento con más de siete años de experiencia en gestión de inventarios, centros de distribución (CEDIS), plataformas logísticas y retail. Combino la supervisión operativa con el análisis avanzado de datos, auditoría de costos en ERP, modelado de indicadores clave (KPI) y automatización de reportes para fortalecer la toma de decisiones gerenciales.
+          </p>
+
+          <div class="metrics-row">
+            <div class="metric-box">
+              <strong>+7 años</strong>
+              <span>En control operativo e inventarios</span>
+            </div>
+            <div class="metric-box">
+              <strong>&gt;95%</strong>
+              <span>Confiabilidad de inventario alcanzada</span>
+            </div>
+            <div class="metric-box">
+              <strong>8.º Sem.</strong>
+              <span>Administración Tecnológica (ITM)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="skills-group">
+            <h3>Competencias Estratégicas</h3>
+            <div class="tags">
+              <span class="tag">Liderazgo Operativo</span>
+              <span class="tag">Control de Inventarios (VMI y Mayoristas)</span>
+              <span class="tag">Gestión de Costos y KPI</span>
+              <span class="tag">Transformación Digital</span>
+              <span class="tag">Optimización de Procesos</span>
+              <span class="tag">Auditoría de Inventarios</span>
+              <span class="tag">Logística Inversa</span>
+            </div>
+          </div>
+
+          <div class="skills-group">
+            <h3>Herramientas y Tecnología</h3>
+            <div class="tags">
+              <span class="tag">Power BI y Business Intelligence</span>
+              <span class="tag">Power Query</span>
+              <span class="tag">Microsoft Access</span>
+              <span class="tag">Excel Avanzado</span>
+              <span class="tag">Uso de Macros (VBA)</span>
+              <span class="tag">SQL Server y Bases de Datos</span>
+              <span class="tag">Administración ERP (DSI)</span>
+              <span class="tag">Microsoft 365</span>
+              <span class="tag">Fundamentos de Ciberseguridad</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA PROFESIONAL -->
+  <section id="experiencia" class="alt-bg">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">Trayectoria Laboral</span>
+        <h2>Experiencia profesional</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="timeline">
+        <!-- VAIN S.A.S. -->
+        <article class="exp-card">
+          <div class="exp-header">
+            <div>
+              <h3 class="exp-company">VAIN S.A.S.</h3>
+              <span class="exp-location">Medellín, Antioquia, Colombia</span>
+            </div>
+            <span class="exp-period">Dic. 2024 – Actualidad</span>
+          </div>
+
+          <div class="role-block">
+            <div class="role-title-row">
+              <h4>Coordinador de Operaciones y Transformación Digital</h4>
+              <span class="role-dates">Jun. 2026 – Actualidad</span>
+            </div>
+            <ul class="exp-list">
+              <li>Lidero el control estratégico de inventarios (materia prima, producto terminado, VMI y canal mayorista), la gestión logística y las iniciativas de transformación digital con reporte matricial a la Gerencia de Operaciones y la Gerencia Administrativa.</li>
+              <li>Dirijo la auditoría y el análisis de desviaciones de costos en el ERP, la estructuración métrica de la logística inversa y el diseño de tableros gerenciales en Power BI conectados a SQL Server.</li>
+              <li>Coordino el gobierno tecnológico interno, la administración de Microsoft 365 y la automatización de procesos críticos para elevar la confiabilidad de la información por sede.</li>
+            </ul>
+          </div>
+
+          <div class="role-block">
+            <div class="role-title-row">
+              <h4>Analista de Operaciones</h4>
+              <span class="role-dates">Dic. 2024 – May. 2026</span>
+            </div>
+            <ul class="exp-list">
+              <li>Garanticé el control y análisis integral de inventarios de materia prima y producto terminado, asegurando trazabilidad y seguimiento oportuno a variaciones operativas.</li>
+              <li>Diseñé y monitoreé indicadores clave de desempeño (KPI) y reportes estratégicos de ventas, cartera e inventarios por sede para soportar decisiones directivas.</li>
+              <li>Propuse e implementé mejoras funcionales en el ERP y rutinas automatizadas de depuración de datos orientadas a la eficiencia y rentabilidad operativa.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- ALMACENES FLAMINGO S.A. -->
+        <article class="exp-card">
+          <div class="exp-header">
+            <div>
+              <h3 class="exp-company">Almacenes Flamingo S.A.</h3>
+              <span class="exp-location">Medellín, Antioquia, Colombia</span>
+            </div>
+            <span class="exp-period">Ago. 2018 – Oct. 2024</span>
+          </div>
+
+          <div class="role-block">
+            <div class="role-title-row">
+              <h4>Supervisor de Control de Inventarios</h4>
+              <span class="role-dates">Jun. 2020 – Oct. 2024</span>
+            </div>
+            <ul class="exp-list">
+              <li>Lideré el equipo operativo y la implementación de los módulos de inventario del nuevo sistema comercial, transformando controles manuales en procesos sistematizados.</li>
+              <li>Incrementé la confiabilidad del inventario por encima del 95% mediante la programación y ejecución disciplinada de inventarios cíclicos y generales.</li>
+              <li>Gestioné entradas, salidas, novedades con proveedores e indicadores de exactitud operativa en tiendas y plataformas logísticas.</li>
+            </ul>
+          </div>
+
+          <div class="role-block">
+            <div class="role-title-row">
+              <h4>Auxiliar de Inventarios</h4>
+              <span class="role-dates">Jun. 2019 – Jun. 2020</span>
+            </div>
+            <ul class="exp-list">
+              <li>Apoyé la operación logística y el control de inventarios, contribuyendo a la optimización del almacenamiento, la distribución y el reporte oportuno de novedades.</li>
+            </ul>
+          </div>
+
+          <div class="role-block">
+            <div class="role-title-row">
+              <h4>Coordinador de Bodega</h4>
+              <span class="role-dates">Ago. 2018 – May. 2019</span>
+            </div>
+            <ul class="exp-list">
+              <li>Lideré el proceso logístico de apertura de una nueva sucursal, coordinando el recibo, la organización de bodega y la distribución de mercancía desde el inicio de operaciones.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS: PASADO, PRESENTE Y FUTURO -->
+  <section id="proyectos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">Impacto y Visión</span>
+        <h2>Proyectos: pasado, presente y futuro</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="filter-bar" role="tablist" aria-label="Filtrar proyectos por etapa">
+        <button class="filter-btn active" data-filter="todos">Todos</button>
+        <button class="filter-btn" data-filter="pasado">Pasado</button>
+        <button class="filter-btn" data-filter="presente">Presente</button>
+        <button class="filter-btn" data-filter="futuro">Futuro</button>
+      </div>
+
+      <div class="projects-grid">
+        <!-- PASADO 1 -->
+        <article class="project-card" data-stage="pasado">
+          <div>
+            <span class="status-badge status-pasado">Pasado (Ejecutado)</span>
+            <h3>Sistematización de Inventarios Comerciales (&gt;95% Confiabilidad)</h3>
+            <p>
+              Implementación operativa de los módulos de inventario del nuevo sistema comercial en Almacenes Flamingo, migrando registros manuales a flujos trazables con auditorías cíclicas de alta precisión.
+            </p>
+          </div>
+          <div class="project-footer">
+            <span class="mini-tag">ERP Retail</span>
+            <span class="mini-tag">Inventarios Cíclicos</span>
+            <span class="mini-tag">Liderazgo</span>
+          </div>
+        </article>
+
+        <!-- PASADO 2 -->
+        <article class="project-card" data-stage="pasado">
+          <div>
+            <span class="status-badge status-pasado">Pasado (Ejecutado)</span>
+            <h3>Automatización de Fichas Técnicas y Cartera con VBA</h3>
+            <p>
+              Desarrollo de soluciones en Excel VBA integradas al ERP para estandarizar costos de producción en fichas técnicas con trazabilidad documental y agilizar la consolidación de seguimiento de cartera.
+            </p>
+          </div>
+          <div class="project-footer">
+            <span class="mini-tag">Excel VBA</span>
+            <span class="mini-tag">ERP DSI</span>
+            <span class="mini-tag">Automatización</span>
+          </div>
+        </article>
+
+        <!-- PRESENTE 1 -->
+        <article class="project-card" data-stage="presente">
+          <div>
+            <span class="status-badge status-presente">Presente (En curso)</span>
+            <h3>Plataforma de Business Intelligence en Tiempo Real</h3>
+            <p>
+              Despliegue de tableros gerenciales en Power BI (escritorio y móvil) conectados a bases de datos SQL Server mediante Data Gateway con actualización programada para cartera, ventas e inventarios.
+            </p>
+          </div>
+          <div class="project-footer">
+            <span class="mini-tag">Power BI</span>
+            <span class="mini-tag">SQL Server</span>
+            <span class="mini-tag">KPI Gerenciales</span>
+          </div>
+        </article>
+
+        <!-- PRESENTE 2 -->
+        <article class="project-card" data-stage="presente">
+          <div>
+            <span class="status-badge status-presente">Presente (En curso)</span>
+            <h3>Transformación Digital Operativa y Portal Mayorista</h3>
+            <p>
+              Coordinación de la integración de pedidos digitales para el canal mayorista, fortalecimiento de la infraestructura TI y planeación integral de inventarios físicos simultáneos de fin de año.
+            </p>
+          </div>
+          <div class="project-footer">
+            <span class="mini-tag">Transformación Digital</span>
+            <span class="mini-tag">Gobierno TI</span>
+            <span class="mini-tag">VMI</span>
+          </div>
+        </article>
+
+        <!-- FUTURO 1 -->
+        <article class="project-card" data-stage="futuro">
+          <div>
+            <span class="status-badge status-futuro">Futuro (Proyección)</span>
+            <h3>Especialización en Gerencia de Proyectos y Operaciones</h3>
+            <p>
+              Culminación del pregrado en Administración Tecnológica (ITM) seguida de una especialización enfocada en dirección estratégica de operaciones, optimización financiera y gestión de proyectos.
+            </p>
+          </div>
+          <div class="project-footer">
+            <span class="mini-tag">Posgrado</span>
+            <span class="mini-tag">Dirección Operativa</span>
+            <span class="mini-tag">Estrategia</span>
+          </div>
+        </article>
+
+        <!-- FUTURO 2 -->
+        <article class="project-card" data-stage="futuro">
+          <div>
+            <span class="status-badge status-futuro">Futuro (Proyección)</span>
+            <h3>Arquitectura Predictiva de Cadena de Suministro</h3>
+            <p>
+              Consolidación de modelos analíticos de proyección de demanda, trazabilidad automatizada de inventarios VMI y escalamiento profesional hacia una Gerencia de Operaciones basada en datos.
+            </p>
+          </div>
+          <div class="project-footer">
+            <span class="mini-tag">Analítica Predictiva</span>
+            <span class="mini-tag">Supply Chain</span>
+            <span class="mini-tag">Gerencia</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMACIÓN Y CERTIFICACIONES -->
+  <section id="formacion" class="alt-bg">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">Respaldo Académico</span>
+        <h2>Formación profesional y certificaciones</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="edu-grid">
+        <!-- Formación Profesional -->
+        <div>
+          <h3 class="edu-subtitle">Formación Profesional</h3>
+          <div class="edu-list">
+            <div class="edu-item">
+              <div class="edu-item-top">
+                <h3>Profesional en Administración Tecnológica</h3>
+                <span class="edu-year">2023 – Actualidad</span>
+              </div>
+              <p class="edu-inst">Institución Universitaria ITM · Medellín</p>
+              <p class="edu-note">En curso (8.º semestre) · Enfoque en gestión operativa, tecnología y analítica estratégica.</p>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-item-top">
+                <h3>Tecnólogo en Gestión Logística</h3>
+                <span class="edu-year">2019 – 2021</span>
+              </div>
+              <p class="edu-inst">Servicio Nacional de Aprendizaje (SENA)</p>
+              <p class="edu-note">Planeación de cadena de suministro, distribución, almacenamiento e inventarios.</p>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-item-top">
+                <h3>Bachiller Académico</h3>
+                <span class="edu-year">2005 – 2017</span>
+              </div>
+              <p class="edu-inst">Institución Educativa La Milagrosa · Medellín</p>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-item-top">
+                <h3>Idiomas</h3>
+                <span class="edu-year">Formación continua</span>
+              </div>
+              <p class="edu-inst">Español (Nativo) · Inglés (Básico – en curso universitario)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificados y Cursos Cortos -->
+        <div>
+          <h3 class="edu-subtitle">Certificados y Cursos Cortos</h3>
+          <div class="edu-list">
+            <div class="edu-item">
+              <div class="edu-item-top">
+                <h3>Excel Aplicado a los Negocios (Nivel Avanzado)</h3>
+                <span class="edu-year">Jun. 2026</span>
+              </div>
+              <p class="edu-inst">Universidad Austral</p>
+              <p class="edu-note">ID de credencial: EPH3QAYCA9XE · Análisis, optimización y automatización de datos de negocio.</p>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-item-top">
+                <h3>Excel Avanzado para la Gestión y Optimización de Datos</h3>
+                <span class="edu-year">2025</span>
+              </div>
+              <p class="edu-inst">Sapiencia</p>
+              <p class="edu-note">Modelado de datos, automatización de informes y análisis operativo.</p>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-item-top">
+                <h3>Introducción a la Ciberseguridad</h3>
+                <span class="edu-year">2025</span>
+              </div>
+              <p class="edu-inst">Cisco Networking Academy</p>
+              <p class="edu-note">Buenas prácticas de protección de información, redes y activos digitales corporativos.</p>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-item-top">
+                <h3>Administración y Control de Inventarios</h3>
+                <span class="edu-year">2018</span>
+              </div>
+              <p class="edu-inst">Servicio Nacional de Aprendizaje (SENA)</p>
+              <p class="edu-note">Técnicas de conteo, clasificación ABC, rotación y confiabilidad de existencias.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NOTA DE REFERENCIAS SOLO PARA PDF ATS -->
+      <p class="ats-only ats-references-note">
+        <strong>Referencias laborales:</strong> Disponibles bajo solicitud.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACTO, REDES Y QR (SOLO VISTA WEB; EN PDF ATS VA EN EL ENCABEZADO SUPERIOR) -->
+  <section id="contacto">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">Conexión Directa</span>
+        <h2>Contacto y redes profesionales</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card">
+          <div class="contact-items">
+            <div class="contact-box">
+              <span class="contact-label">Teléfono / WhatsApp</span>
+              <a class="contact-value" href="https://wa.me/573004286188" target="_blank" rel="noopener noreferrer">+57 300 428 6188</a>
+            </div>
+
+            <div class="contact-box">
+              <span class="contact-label">Correo electrónico</span>
+              <span class="contact-value">Edison050899@gmail.com</span>
+            </div>
+
+            <div class="contact-box">
+              <span class="contact-label">Ubicación</span>
+              <span class="contact-value">Medellín, Antioquia, Colombia</span>
+            </div>
+
+            <div class="contact-box">
+              <span class="contact-label">Referencias laborales</span>
+              <span class="contact-value">Disponibles bajo solicitud</span>
+            </div>
+          </div>
+
+          <h3 class="social-heading">Redes sociales y contacto rápido</h3>
+          <div class="social-row">
+            <a class="social-btn" href="https://www.linkedin.com/in/edison-ossa-rendon-514617319/" target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
+            <a class="social-btn" href="https://wa.me/573004286188" target="_blank" rel="noopener noreferrer">
+              WhatsApp Directo
+            </a>
+          </div>
+        </div>
+
+        <!-- TARJETA DE CÓDIGO QR WHATSAPP -->
+        <div class="qr-card">
+          <h3>Escríbeme por WhatsApp</h3>
+          <p>Escanea el código QR desde tu celular para iniciar un chat directo.</p>
+
+          <div class="qr-box" id="qrContainer" aria-label="Código QR de WhatsApp +57 300 428 6188"></div>
+          <span class="qr-number">+57 300 428 6188</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA (SOLO WEB) -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Edison Ossa Rendón · Portafolio Profesional Web · Medellín, Colombia</p>
+    </div>
+  </footer>
+
+  <script>
+    // Menú móvil
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+
+    menuToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('open');
+    });
+
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mainNav.classList.remove('open'));
+    });
+
+    // Filtro de proyectos (Pasado, Presente, Futuro)
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const selected = btn.dataset.filter;
+        projectCards.forEach(card => {
+          if (selected === 'todos' || card.dataset.stage === selected) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Generación dinámica del código QR exclusivo para WhatsApp (+573004286188)
+    function renderQR() {
+      const container = document.getElementById('qrContainer');
+      const whatsappUrl = 'https://wa.me/573004286188';
+
+      container.innerHTML = '';
+
+      if (typeof QRCode !== 'undefined') {
+        new QRCode(container, {
+          text: whatsappUrl,
+          width: 150,
+          height: 150,
+          colorDark: '#0d1326',
+          colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.M
+        });
+      } else {
+        const img = document.createElement('img');
+        img.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=0d1326&data=${encodeURIComponent(whatsappUrl)}`;
+        img.alt = 'Código QR de WhatsApp +57 300 428 6188';
+        img.width = 150;
+        img.height = 150;
+        container.appendChild(img);
+      }
+    }
+
+    window.addEventListener('load', renderQR);
+
+    // Exportar a PDF usando las reglas estrictas ATS de @media print
+    function exportarPDF() {
+      window.print();
+    }
+  </script>
+</body>
+</html>
